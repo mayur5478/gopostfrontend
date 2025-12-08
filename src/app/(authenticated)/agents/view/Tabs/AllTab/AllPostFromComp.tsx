@@ -219,10 +219,11 @@ export default function AllPostFromComp(props: Props) {
 
   if (loading)
     return (
-      <div className="w-full h-full flex justify-center text-xl">
-        {" "}
-        <Loader2 className="mr-2 h-10 w-10 animate-spin" />
-      </div>
+<div className="w-full flex-1 flex flex-col justify-center items-center text-xl text-gray-600 animate-fadeIn">
+  <Loader2 className="h-10 w-10 animate-spin text-[#FDE047] mb-3" />
+  <p className="text-base animate-pulse">Getting all posts...</p>
+</div>
+
     );
 
   return (

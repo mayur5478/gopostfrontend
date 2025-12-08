@@ -25,9 +25,9 @@ import {
 } from "@/components/ui/select";
 import SocialNetworkImage from "../../../../public/SocialNetworkImage.svg"
 import Image from "next/image";
-import { AgentData,Settings,DestinationPlatform } from "../agents/list/types";
+import { AgentData,Settings } from "../agents/list/types";
 import AgentCard from "../agents/list/AgentCard"
-import { AGENT_URLS } from "@/lib/urls";
+import { AGENT_URLS, CHANNEL_URL } from "@/lib/urls";
 import api from "@/lib/axios"
 import mapAgentList from "../agents/list/mapAgentList";
 
@@ -61,9 +61,11 @@ export default function Home() {
   useEffect(() => {
     async function fetchAgents() {
       try {
+        let channel = await api.get(CHANNEL_URL.GET_CHANNEL);
+        console.log("get all channels", channel.data.results);
         const { data } = await api.get(AGENT_URLS.GET_AGENTS);
         if (data && data.results) {
-          let newAgents: AgentData[] = data.results.map((agentCard: any) => mapAgentList(agentCard))
+          let newAgents: AgentData[] = data.results.map((agentCard: any) => mapAgentList(agentCard,channel.data.results))
           setAgents(newAgents)
         }
       } catch (err) {

@@ -45,6 +45,20 @@ async function fetchPresignedUrl(
   }
 }
 
+// Simple helper to guess type if API didn't return it
+function detectType(url: string): "video" | "image" | "text" {
+  if (!url) return "text";
+  const lower = url.toLowerCase();
+  if (lower.match(/\.(mp4|mov|avi|webm|mkv)$/i)) return "video";
+  if (lower.match(/\.(jpg|jpeg|png|gif|webp|bmp)$/i)) return "image";
+  return "image"; // Default
+}
+
+function isImage(url: string): boolean {
+    if (!url) return false;
+    return !!url.toLowerCase().match(/\.(jpg|jpeg|png|gif|webp|bmp)$/i);
+}
+
 // --- API Fetch Function ---
 
 async function fetchSourcePosts(channelId: number): Promise<SourcePost[]> {
@@ -57,7 +71,7 @@ async function fetchSourcePosts(channelId: number): Promise<SourcePost[]> {
       return [];
     }
 
-    // Handle both array (new APIView) and paginated object (old ViewSet)
+    // Handle both array (new APIView for external) and paginated object (old ViewSet for DB)
     const results = Array.isArray(response.data) 
       ? response.data 
       : response.data.results || [];
@@ -68,9 +82,9 @@ async function fetchSourcePosts(channelId: number): Promise<SourcePost[]> {
         let rawMediaUrl = post.media_url || post.mediaUrl || post.url || post.file || "";
 
         // 2. Extract Thumbnail
-        let rawThumbnailKey = post.thumbnail_url || post.thumbnailUrl || post.thumbnail;
+        let rawThumbnailKey = post.thumbnail_url || post.thumbnailUrl || post.thumbnail || "";
 
-        // If it's an internal key, resolve it (unlikely for Source posts, but good safety)
+        // If it's an internal key (e.g. from DB posts), resolve it
         if (isFileKey(rawMediaUrl)) {
            rawMediaUrl = await fetchPresignedUrl(rawMediaUrl);
         }
@@ -79,7 +93,8 @@ async function fetchSourcePosts(channelId: number): Promise<SourcePost[]> {
         }
 
         // Fallback: If image type but no thumbnail, use media URL
-        if (!rawThumbnailKey && (post.type === "image" || isImage(rawMediaUrl))) {
+        const type = post.type || detectType(rawMediaUrl);
+        if (!rawThumbnailKey && (type === "image" || isImage(rawMediaUrl))) {
           rawThumbnailKey = rawMediaUrl;
         }
 
@@ -108,7 +123,7 @@ async function fetchSourcePosts(channelId: number): Promise<SourcePost[]> {
           description: description,
           hashtags: post.tags || post.hashtags || [],
           created_at: post.created_at || new Date().toISOString(),
-          type: post.type || detectType(rawMediaUrl),
+          type: type,
           platform: post.platform || "unknown",
         };
       })
@@ -119,18 +134,6 @@ async function fetchSourcePosts(channelId: number): Promise<SourcePost[]> {
     console.error("Error in fetchSourcePosts:", error);
     throw error;
   }
-}
-
-// Simple helper to guess type if API didn't return it
-function detectType(url: string): "video" | "image" | "text" {
-  if (!url) return "text";
-  if (url.match(/\.(mp4|mov|avi|webm)$/i)) return "video";
-  if (url.match(/\.(jpg|jpeg|png|gif|webp)$/i)) return "image";
-  return "image"; // Default
-}
-
-function isImage(url: string): boolean {
-    return !!url.match(/\.(jpg|jpeg|png|gif|webp)$/i);
 }
 
 // --- Component Props ---
@@ -164,8 +167,6 @@ export default function ThirdStepCrossPost({
 
     fetchSourcePosts(sourceAccount.id)
       .then((posts) => {
-        // Filter out posts that are purely text if you only want media
-        // Or keep them if you support text-only posts
         setSourcePosts(posts);
       })
       .catch((err) => {
@@ -296,8 +297,9 @@ export default function ThirdStepCrossPost({
                     <Image
                       src={previewImage}
                       alt="Post thumbnail"
-                      layout="fill"
-                      objectFit="cover"
+                      fill // FIXED: Use 'fill' prop for Next.js 13+
+                      className="object-cover" // FIXED: Use Tailwind class for styling
+                      unoptimized={true} // CRITICAL FIX: This stops Next.js from proxying/optimizing external images, preventing 429 errors
                       onError={(e) => {
                         // Hide image on error and show icon
                         e.currentTarget.style.display = "none";
@@ -342,3 +344,6 @@ export default function ThirdStepCrossPost({
     </div>
   );
 }
+
+
+

@@ -4,7 +4,7 @@
 import React, { Dispatch } from "react";
 import api from "@/lib/axios";
 import { useEffect, useState } from "react";
-import { AgentData, DestinationPlatform, Settings } from "../../../list/types";
+import { AgentData, Settings } from "../../../list/types";
 import { AccountType, PostType, Channel_Posts } from "../../../create/types";
 import { AGENT_URLS, CHANNEL_URL } from "@/lib/urls"; // Import AGENT_URLS for patching schedule
 import CarouselAll from "./CarouselAll";

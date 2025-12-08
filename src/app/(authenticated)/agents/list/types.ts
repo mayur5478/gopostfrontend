@@ -1,12 +1,14 @@
-export type DestinationPlatform = {
-  connectionId: string,
-  platform: string,
-  account_name: string,
-  auth_token: string,
-  status: string,
-  createdAt: string,
-  updatedAt: string
-};
+// export type DestinationPlatform = {
+//   connectionId: string,
+//   platform: string,
+//   account_name: string,
+//   auth_token: string,
+//   status: string,
+//   createdAt: string,
+//   updatedAt: string
+// };
+
+import { AccountType } from "../create/types";
 
 export type Settings = {
   autoFetch: boolean,
@@ -23,7 +25,7 @@ export type AgentData = {
   status: string,
   type: string,
   source: string,
-  destinationPlatforms: DestinationPlatform[],
+  destinationPlatforms: AccountType[],
   settings: Settings,
   createdAt: string,
   updatedAt: string

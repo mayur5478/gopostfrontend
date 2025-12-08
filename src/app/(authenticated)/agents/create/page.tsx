@@ -308,7 +308,6 @@ export default function CreateAgent() {
       if (!agentId) {
         throw new Error("Failed to get agent ID from the creation response.");
       }
-
       const validAgentId = agentId as string;
 
       // --- API Call 2: Create Posts based on Agent Type ---
@@ -340,7 +339,7 @@ export default function CreateAgent() {
           carousels: carouselPosts
             .map((cp) => {
               const mediaUrls = cp.media
-                .map((m) => m.mediaUrl) // Use signed URLs or Keys depending on backend expectation for carousel
+                .map((m) => m.fileKey)
                 .filter(Boolean) as string[];
               return { name: cp.name, media_urls: mediaUrls };
             })

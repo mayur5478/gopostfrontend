@@ -14,7 +14,7 @@ import AgentCard from "./AgentCard";
 import api from "@/lib/axios";
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { AGENT_URLS } from "@/lib/urls";
+import { AGENT_URLS, CHANNEL_URL } from "@/lib/urls";
 import { AgentData } from "./types";
 import mapAgentList from "./mapAgentList";
 
@@ -77,13 +77,14 @@ export default function ListAgent() {
       if (selectSort === "Name Z-A") params.ordering = "-name";
 
       console.log("Fetching agents with params:", params);
-
+        let channel = await api.get(CHANNEL_URL.GET_CHANNEL);
+        console.log("get all channels", channel.data.results);
       // 5. Call API
       const response = await api.get(AGENT_URLS.GET_AGENTS, { params });
       const data = response.data;
-
+      console.log("agent data",data.results)
       if (data && data.results) {
-        const newAgents: AgentData[] = data.results.map((agentCard: any) => mapAgentList(agentCard));
+        const newAgents: AgentData[] = data.results.map((agentCard: any) => mapAgentList(agentCard,channel.data.results));
         setAgents(newAgents);
         setTotalAgents(data.count || 0);
         setTotalPages(Math.ceil((data.count || 0) / PAGE_SIZE));
