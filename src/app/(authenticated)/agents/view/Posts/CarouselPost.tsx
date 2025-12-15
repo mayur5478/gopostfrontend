@@ -3,13 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import api from "@/lib/axios";
-import {
-  Dialog,
-  DialogContent,
-  DialogOverlay,
-  DialogPortal,
-} from "@/components/ui/dialog";
-import PostSettingForCarousel from "@/app/(authenticated)/postsetting/PostSettingForCarousel";
+
 import { X, ChevronDown, ChevronUp, MoreHorizontal, CalendarClock, Loader2 } from "lucide-react"; 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"; 
 import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube, FaPlayCircle, FaGoogleDrive } from "react-icons/fa";
@@ -46,6 +40,9 @@ function isFileKey(url: string): boolean {
 
 type props = {
   postDetails: CarouselPostDetails;
+      onEdit: () => void;
+
+
 };
 
 export default function CarouselPost(props: props) {
@@ -101,7 +98,6 @@ export default function CarouselPost(props: props) {
     props.postDetails.posts?.map((p) => getTimeFromDate(p.scheduleTime)) || []
   );
 
-  const [openPostSetting, setOpenPostSetting] = useState(false);
 
   const iconElementsWithScheduleTime = (
     <div className="flex flex-col gap-1">
@@ -249,23 +245,25 @@ export default function CarouselPost(props: props) {
               />
             )}                          
           </div>
-          <div className="flex flex-col gap-1 flex-1 min-w-0">
-            <div className="inline-flex gap-2 items-center">
+          <div className="flex flex-col gap-1 p-1 flex-1 min-w-0">
+            <div className="inline-flex gap-2">
               <div className="postTitle font-medium truncate text-sm">{representativePost.title}</div>
               <Badge
                 variant="outline"
                 className={classNames(
-                  "w-fit h-fit px-1.5 py-0.5 font-medium rounded text-[9px] flex items-center justify-center leading-none capitalize",
-                  representativePost.status === "published" && "border-[#00C950] text-[#008236] bg-[#F0FDF4]",
+                  "w-fit h-fit font-medium rounded test-[9px] flex items-center justify-center leading-none capitalize", 
+                 representativePost.status === "published" && "border-[#00C950] text-[#008236] bg-[#F0FDF4]",
                   representativePost.status?.includes("scheduled") && "border-[#FEF186] text-[#A66000] bg-[#FEFCE8]",
                   representativePost.status === "failed" && "border-[#FF6467] text-[#E7000B] bg-[#FEF2F2]",
-                  representativePost.status === "pending" && "border-gray-300 text-gray-600 bg-gray-100"
+                  representativePost.status === "pending" && "border-gray-300 text-gray-600 bg-gray-100",
+                  representativePost.status === "approved" &&
+                "border-green-400 text-green-600 bg-green-50"
                 )}
               >
                 {representativePost.status}
               </Badge>
+              </div>
               {iconElementsWithScheduleTime}
-            </div>
           </div>
         </div>
 
@@ -282,10 +280,11 @@ export default function CarouselPost(props: props) {
           </div>
           <Button
             variant="outline"
-            className="editDetails bg-[#FDE047] rounded-lg px-3 text-xs h-8 hover:bg-[#FDE047]/90 text-black"
+          className="editDetails bg-[#FDE047] rounded-2xl pl-5 pr-5"
+            //className="editDetails bg-[#FDE047] rounded-lg px-3 text-xs h-8 hover:bg-[#FDE047]/90 text-black"
             onClick={(e) => {
               e.stopPropagation(); 
-              setOpenPostSetting(true);
+              props.onEdit();
             }}
           >
             Edit Details
@@ -298,22 +297,7 @@ export default function CarouselPost(props: props) {
             <MoreHorizontal className="h-4 w-4 text-gray-600" />
           </Button>
 
-          <Dialog open={openPostSetting} onOpenChange={setOpenPostSetting}>
-            <DialogPortal>
-              <DialogOverlay className="fixed inset-0 bg-black/30 z-40" />
-              {/* UPDATED CONTAINER STYLE TO MATCH STANDARD POST SETTINGS */}
-              <div
-                className="fixed inset-0 w-screen h-screen bg-white shadow-lg overflow-y-auto z-50 animate-in slide-in-from-bottom-10"
-              >
-                {/* We don't need a manual close button here if PostSettingForCarousel has one, 
-                    but passing onClose handles it properly. */}
-                <PostSettingForCarousel 
-                    carouselPost={props.postDetails} 
-                    onClose={() => setOpenPostSetting(false)}
-                />
-              </div>
-            </DialogPortal>
-          </Dialog>
+
 
           {displayAllMediaUrls.length > 1 && (
             <CollapsibleTrigger asChild>

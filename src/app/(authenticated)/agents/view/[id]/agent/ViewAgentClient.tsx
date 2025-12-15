@@ -23,7 +23,7 @@ import Published from "../../Tabs/Published";
 import Unpublished from "../../Tabs/Unpublished";
 import Scheduled from "../../Tabs/Scheduled";
 import { CalendarSync, Laptop } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import api from "@/lib/axios";
 import { use, useEffect, useState } from "react";
 import { AGENT_URLS, CHANNEL_URL, MEDIA_ENGINE_URLS } from "@/lib/urls";
@@ -35,41 +35,39 @@ import ImportFromLibraryButton from "./ImportFromLibraryButton"
 import { MediaItem } from "../../../create/components/LibraryImportModal";
 import { BiSolidChevronsRight } from "react-icons/bi";
 import { IconType } from "react-icons";
-// import LibraryImportModal from "../../../create/components/LibraryImportModal";
 
 export default function ViewAgentClient() {
   console.log("Inside page.tsx of viewagent");
-
-  // Helper function to get platform icon
-  // const getPlatformIcon = (platform: string) => {
-  //   switch (platform.toLowerCase()) {
-  //     case "facebook":
-  //       return <FaFacebook className="h-6 w-6 text-blue-600 text-[14px]" />;
-  //     case "instagram":
-  //       return <FaInstagram className="h-6 w-6 text-pink-500 text-[14px]" />;
-  //     case "linkedin":
-  //       return <FaLinkedin className="h-6 w-6 text-blue-700 text-[14px]" />;
-  //     case "youtube":
-  //       return <FaYoutube className="h-6 w-6 text-red-600 text-[14px]" />;
-  //     default:
-  //       return <FaPlayCircle className="h-6 w-6 text-gray-600 text-[14px]" />;
-  //   }
-  // };
 
   const [agent, setAgent] = useState<AgentData>();
   const [selectedPosts, setSelectedPosts] = useState<PostType[]>([]);
   const [selectedCPosts, setSelectedCPosts] = useState<CarouselPostDetails[]>(
     []
   );
+  const [agentName, setAgentName] = useState(agent?.name);
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams(); // Added useSearchParams
+  
   const [refreshKey, setRefreshKey] = useState(0);
   const [isEditingName, setIsEditingName] = useState(false);
-  const [tempName, setTempName] = useState(agent?.name);
+  const [tempName, setTempName] = useState("");
   const [sourceIcon, setSourceIcon] = useState<React.JSX.Element>(<div></div>);
   const [destIcons, setDestIcons] = useState<React.JSX.Element[]>([]);
   const [sourcePlatform, setSourcePlatfrom] = useState<string>("");
   
+  // Tab State
+  const [activeTab, setActiveTab] = useState("All");
+
+  // Check for focusPost in URL and switch to Scheduled tab if present
+  useEffect(() => {
+    const focusPostId = searchParams.get('focusPost');
+    if (focusPostId) {
+      setActiveTab("Scheduled");
+      // Optional: Add logic here to scroll to the post with ID `focusPostId` if your sub-components support refs or ids
+    }
+  }, [searchParams]);
+
   const getIconAndColor = (
     channel: string
   ): { Icon: IconType | null; color: string } => {
@@ -120,6 +118,9 @@ export default function ViewAgentClient() {
         console.log("data here for posts", data);
         let agent: AgentData = mapAgentList(data, channel.data.results);
         setAgent(agent);
+        setAgentName(agent.name);
+        setTempName(agent.name);
+
         //   console.log("response data here",data);
       } catch (err) {
         console.error("Failed to fetch agents:", err);
@@ -127,123 +128,115 @@ export default function ViewAgentClient() {
       }
     }
     fetchAgents();
-  }, [refreshKey, isEditingName]);
-  
+  }, [refreshKey])//  , isEditingName]);
+
+
   useEffect(() => {
-    if(agent){
-    if (sourcePlatform === "local") {
+    if (!agent) return;
+
+    const platform = agent.source;
+    // Set source icon
+    if (platform === "local") {
       setSourceIcon(<SourceLocal />);
     } else {
-      setSourcePlatfrom(agent.source)
-      //(sourcePlatform === "google" ||sourcePlatform === "linkedin"||sourcePlatform === "youtube"){
-      const { Icon, color } = getIconAndColor(sourcePlatform)
-      if (!Icon) return;
-      setSourceIcon(
-        <div
-          className={`w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 shadow-sm `}
-        >
-          <Icon className={`w-5 h-5 ${color} `} />
-        </div>
-      );
+      const { Icon, color } = getIconAndColor(platform);
+      if (Icon) {
+        setSourceIcon(
+          <div className="w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 shadow-sm">
+            <Icon className={`w-5 h-5 ${color}`} />
+          </div>
+        );
+      }
     }
-    //console.log("agent", props.AgentCardDetails)
-    //for destination icon get all channels first then check the account type ids from agent connections 
-    // Save the channel types for your other state
-    // setDestPlatfroms(props.AgentCardDetails.destinationPlatforms.map((ch) => ch.channel_type));
+    //Set destination icons
     const icons = agent.destinationPlatforms.map((ch) => {
       const { Icon, color } = getIconAndColor(ch.channel_type);
-      return Icon ? (
-        <Icon key={ch.id} className={`w-5 h-5 ${color} `} />
-      ) : null
-    }
-    )
-    // Convert to icons
-    setDestIcons(
-      icons.filter((i): i is React.ReactElement => i !== null)
-    )
-  }
-  }, [agent]);
-
-const addPostsToAgent = async (newPosts: PostType[]) => {
-  console.log("inside add post for agent", newPosts);
-
-  if (!params.id) {
-    toast.error("Agent ID missing. Cannot upload posts.");
-    return;
-  }
-
-  if (!agent?.destinationPlatforms?.length) {
-    toast.error("No accounts selected.");
-    return;
-  }
-
-  try {
-    const postCreationPromises = newPosts.map((post) => {
-      // Determine usable media URL
-      const masterMediaUrl = post.fileKey || post.mediaUrl;
-      if (!masterMediaUrl) {
-        console.warn("Skipping post because media is missing:", post.mainId);
-        return Promise.resolve();
-      }
-
-      // Safe fallback inner post (in case post.posts[] is empty)
-      const defaultInner = {
-        title: "Untitled",
-        mediaUrl: masterMediaUrl,
-        thumbnailUrl: masterMediaUrl,
-        tags: [],
-        resize: "square",
-        caption: [],
-        metadata: {},
-      };
-
-      const firstInner = post.posts?.[0] || defaultInner;
-
-      //Build channel_posts for each selected platform
-      const channelPosts = agent.destinationPlatforms.map((account) => {
-        const inner =
-          post.posts?.find((p) => p.platform?.id === account.id) ||
-          firstInner;
-
-        return {
-          channel: account.id,
-          title: inner.title || "Untitled",
-          media_url: post.fileKey || inner.mediaUrl || masterMediaUrl,
-          thumbnail_url: inner.thumbnailUrl || masterMediaUrl,
-          tags: inner.tags || [],
-          resize: inner.resize || "square",
-          caption: inner.caption || [],
-          metadata: inner.metadata || {},
-        };
-      });
-
-      // Master post payload for backend
-      const payload = {
-        original_media_url: masterMediaUrl,
-        channel_posts: channelPosts,
-      };
-
-      return api.post(AGENT_URLS.POSTS(agent.id), payload);
+      return Icon ? <Icon key={ch.id} className={`w-5 h-5 ${color}`} /> : null;
     });
 
-    await Promise.allSettled(postCreationPromises);
-    toast.success("Posts added successfully!");
-  } catch (error: any) {
-    console.error("Error adding posts:", error);
+    setDestIcons(icons.filter(Boolean) as React.ReactElement[]);
+  }, [agent]);
 
-    const msg =
-      error?.response?.data?.detail ||
-      error?.response?.data?.error ||
-      error.message ||
-      "Failed to add posts. Try again.";
+  const addPostsToAgent = async (newPosts: PostType[]) => {
+    console.log("inside add post for agent", newPosts);
 
-    toast.error(msg);
-  }
-  finally{
-            setRefreshKey((prev) => prev + 1);
+    if (!params.id) {
+      toast.error("Agent ID missing. Cannot upload posts.");
+      return;
+    }
 
-  }
-};
+    if (!agent?.destinationPlatforms?.length) {
+      toast.error("No accounts selected.");
+      return;
+    }
+
+    try {
+      const postCreationPromises = newPosts.map((post) => {
+        // Determine usable media URL
+        const masterMediaUrl = post.fileKey || post.mediaUrl;
+        if (!masterMediaUrl) {
+          console.warn("Skipping post because media is missing:", post.mainId);
+          return Promise.resolve();
+        }
+
+        // Safe fallback inner post (in case post.posts[] is empty)
+        const defaultInner = {
+          title: "Untitled",
+          mediaUrl: masterMediaUrl,
+          thumbnailUrl: masterMediaUrl,
+          tags: [],
+          resize: "square",
+          caption: [],
+          metadata: {},
+        };
+
+        const firstInner = post.posts?.[0] || defaultInner;
+
+        //Build channel_posts for each selected platform
+        const channelPosts = agent.destinationPlatforms.map((account) => {
+          const inner =
+            post.posts?.find((p) => p.platform?.id === account.id) ||
+            firstInner;
+
+          return {
+            channel: account.id,
+            title: inner.title || "Untitled",
+            media_url: post.fileKey || inner.mediaUrl || masterMediaUrl,
+            thumbnail_url: inner.thumbnailUrl || masterMediaUrl,
+            tags: inner.tags || [],
+            resize: inner.resize || "square",
+            caption: inner.caption || [],
+            metadata: inner.metadata || {},
+          };
+        });
+
+        // Master post payload for backend
+        const payload = {
+          original_media_url: masterMediaUrl,
+          channel_posts: channelPosts,
+        };
+
+        return api.post(AGENT_URLS.POSTS(agent.id), payload);
+      });
+
+      await Promise.allSettled(postCreationPromises);
+      toast.success("Posts added successfully!");
+    } catch (error: any) {
+      console.error("Error adding posts:", error);
+
+      const msg =
+        error?.response?.data?.detail ||
+        error?.response?.data?.error ||
+        error.message ||
+        "Failed to add posts. Try again.";
+
+      toast.error(msg);
+    }
+    finally {
+      setRefreshKey((prev) => prev + 1);
+
+    }
+  };
 
 
   async function handleSmartSchedule(
@@ -389,24 +382,39 @@ const addPostsToAgent = async (newPosts: PostType[]) => {
     }
   }
 
-  const saveName = async () => {
-    try {
-      const payload = {
-        name: tempName
-      };
-      const { data } = await api.patch(AGENT_URLS.VIEW_AGENT(params.id as string), payload)
-      console.log("patch for editing agent name result", data.name);
-    }
-    catch (err) {
-      console.error("Agent edit name failed ", err);
-    }
-    finally {
-      setIsEditingName(false);
-    }
+const saveName = async () => {
+  try {
+    const payload = { name: tempName };
+
+    const response = await api.patch(
+      AGENT_URLS.VIEW_AGENT(params.id as string),
+      payload
+    );
+
+    // 🔥 Optimistic UI update – no posts refresh
+// setAgent(prev =>
+//   prev ? { ...prev, name: tempName } : prev
+// );
+setAgentName(tempName);
+
+    console.log("Updated name:", response.data.name);
+
+  } catch (err) {
+    console.error("Agent edit name failed ", err);
+    toast.error("Failed to update agent name");
+  } finally {
+    setIsEditingName(false);
   }
+};
+
 
   function cancelEdit() {
-    setTempName(agent?.name);
+    if(agent){
+    setTempName(agentName??agent.name);
+    }
+    else{
+      setTempName("");
+    }
     setIsEditingName(false);
   }
 
@@ -425,7 +433,7 @@ const addPostsToAgent = async (newPosts: PostType[]) => {
             </Button>
             {!isEditingName ? (
               <div className="inline-block font-semibold text-[20px] leading-[100%] tracking-[-0.21px]">
-                {agent.name}
+                {agentName}
               </div>
             ) : (
               <input
@@ -448,7 +456,7 @@ const addPostsToAgent = async (newPosts: PostType[]) => {
                 variant="outline"
                 className="w-fit h-fit px-1 py-1 border-0"
                 onClick={() => {
-                  setTempName(agent.name);   // set default text
+                  setTempName(agentName?? agent.name);   // set default text
                   setIsEditingName(true);
                 }}
               >
@@ -468,32 +476,32 @@ const addPostsToAgent = async (newPosts: PostType[]) => {
           <div className="flex flex-col gap-2">
             <div className="AgetnTypeAndStatus inline-flex gap-2 items-center">
               <div className="text-[18px] text-[#5B5B64]">{agent.type}</div>
-              <Badge className="bg-[#E7FBE0] text-[#43A92C] !px-1 !py-0 !text-[12px] rounded-md w-fit h-fit">
-                {agent.status.charAt(0).toUpperCase() + agent.status.slice(1)}
+              <Badge className="text-[#A66000] bg-[#FEFCE8] !px-1 !py-0 !text-[12px] rounded-md w-fit h-fit capitalize">
+                {agent.status}
               </Badge>
             </div>
-                    <div className="w-fit flex gap-2">
-                      <div className="w-fit">
-                        {sourceIcon}
-                      </div>
-                      <BiSolidChevronsRight style={{ color: "#18181829" }} className="w-8 h-8 bg-gray text-gray"></BiSolidChevronsRight>
-                      <div className="flex items-center w-fit">
-                        {destIcons.map((icon, index) => (
-                          <div
-                            key={index}
-                            className={`
+            <div className="w-fit flex gap-2">
+              <div className="w-fit">
+                {sourceIcon}
+              </div>
+              <BiSolidChevronsRight style={{ color: "#18181829" }} className="w-8 h-8 bg-gray text-gray"></BiSolidChevronsRight>
+              <div className="flex items-center w-fit">
+                {destIcons.map((icon, index) => (
+                  <div
+                    key={index}
+                    className={`
                     w-8 h-8 rounded-full border border-gray-200 bg-white shadow-sm 
                     flex items-center justify-center
                     ${index !== 0 ? "-ml-2" : ""}
                   `}
-                            style={{ zIndex: index + 1 }} 
-                          >
-                            {icon}
-                          </div>
-                        ))}
-                      </div>
-            
-                    </div>
+                    style={{ zIndex: index + 1 }}
+                  >
+                    {icon}
+                  </div>
+                ))}
+              </div>
+
+            </div>
             <div className="Users inline-flex gap-2 justify-start ">
               {/* {agent.destinationPlatforms
                 .filter(
@@ -528,7 +536,7 @@ const addPostsToAgent = async (newPosts: PostType[]) => {
         </div>
         <div className="TabsAndButtons w-full mt-4">
           {/* <div className="tabs"> */}
-          <Tabs defaultValue="All" className="w-full">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <div className="flex items-center justify-between ">
               {/* //border-b border-gray-200 */}
               <TabsList className="flex border-b w-fit justify-start bg-transparent p-0 h-fit gap-3 ml-[1.5rem]">
@@ -594,8 +602,9 @@ const addPostsToAgent = async (newPosts: PostType[]) => {
             <div className="mt-4">
               <TabsContent value="All" className="flex flex-col min-h-[60vh]">
                 <All
-                  key={refreshKey}
+                  // key={refreshKey}
                   refreshKey={refreshKey}
+                  onRefresh={() => setRefreshKey(prev => prev + 1)}   // NEW
                   AgentData={agent}
                   selectedPosts={selectedPosts}
                   setSelectedPosts={setSelectedPosts}
@@ -604,14 +613,18 @@ const addPostsToAgent = async (newPosts: PostType[]) => {
                 />
               </TabsContent>
               <TabsContent value="Approved" className="flex flex-col min-h-[60vh]">
-                <Approved key={refreshKey}
+                <Approved 
+                // key={refreshKey}
+                  onRefresh={() => setRefreshKey(prev => prev + 1)}   // NEW
                   refreshKey={refreshKey}
                   AgentData={agent}
                   selectedPosts={selectedPosts}
                   setSelectedPosts={setSelectedPosts} />
               </TabsContent>
               <TabsContent value="Scheduled" className="flex flex-col min-h-[60vh]">
-                <Scheduled key={refreshKey}
+                <Scheduled 
+                // key={refreshKey}
+                  onRefresh={() => setRefreshKey(prev => prev + 1)}   // NEW
                   refreshKey={refreshKey}
                   AgentData={agent}
                   selectedPosts={selectedPosts}

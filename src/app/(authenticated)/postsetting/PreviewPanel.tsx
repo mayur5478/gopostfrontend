@@ -42,6 +42,7 @@ interface PreviewPanelProps {
   setResizedAspect: Dispatch<SetStateAction<Record<AspectRatio, string>>>;
   updatedMedia: Record<string, string>;
   setUpdatedMedia: Dispatch<SetStateAction<Record<string, string>>>;
+  isCarousel:boolean;
 }
 
 export default function PreviewPanel(props: PreviewPanelProps) {
@@ -101,6 +102,7 @@ export default function PreviewPanel(props: PreviewPanelProps) {
   const modes: Modes[] = ["fill", "crop", "hybrid"];
 
   const url = props.resizedAspect[props.ratios[props.selectedPlatform]] || props.updatedMedia[props.selectedPlatform] || props.post.posts.find(p => p.platform.channel_type === props.selectedPlatform)?.mediaUrl;
+  console.log(url)
   const isVideo = getMediaType(url);
   const [isLoading, setIsLoading] = useState(false);
 const [resizeMessage, setResizeMessage]=useState('Your Media is being resized. Please wait...')
@@ -159,6 +161,71 @@ const [resizeMessage, setResizeMessage]=useState('Your Media is being resized. P
     // }
     console.log("inside preview panel", props.resizedAspect, props.ratios)
   }, [props.resizedAspect, props.ratios]);
+
+  // AUTO-GENERATE RESIZE FOR CAROUSEL POSTS
+useEffect(() => {
+  if (!props.isCarousel) return;                          // Only for carousel
+  const platform = props.selectedPlatform;
+  const aspect = props.ratios[platform];                  // square | vertical | horizontal
+  const existing = props.resizedAspect[aspect];
+
+  // Already resized → do nothing
+  if (existing && existing.trim() !== "") return;
+
+  // Find original media URL for this platform
+  const rawUrl =
+    props.post.posts.find(p => p.platform.channel_type === platform)?.mediaUrl;
+
+  if (!rawUrl) return;
+
+  // Determine video/image
+  const isVideo = getMediaType(rawUrl);
+
+  // Call API to resize automatically
+  const autoResize = async () => {
+    setIsLoading(true);
+    try {
+      let outputUrl = "";
+
+      if (isVideo) {
+        const { data } = await api.post(MEDIA_ENGINE_URLS.RESIZE_MEDIA, {
+          video_url: rawUrl,
+          presets: aspect,
+        });
+        outputUrl = data.resized_videos[aspect].url;
+      } else {
+        const size = IMAGE_SIZES[aspect];
+        const { data } = await api.post(MEDIA_ENGINE_URLS.RESIZE_IMAGE, {
+          image_url: rawUrl,
+          ...size,
+          mode: "hybrid", // default mode
+        });
+        outputUrl = data.image_url;
+      }
+
+      // Save result
+      props.setResizedAspect(prev => ({
+        ...prev,
+        [aspect]: outputUrl,
+      }));
+
+    } catch (err) {
+      console.error("Auto resize failed:", err);
+      setResizeMessage("Failed to auto-resize media");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  autoResize();
+}, [
+  props.isCarousel,
+  // props.selectedPlatform,
+  props.ratios,
+  props.resizedAspect,
+  props.post,
+]);
+
   const downloadFile = async (signedUrl: string, filename: string) => {
     const res = await fetch(signedUrl);
     if (!res.ok) throw new Error("Failed to download");

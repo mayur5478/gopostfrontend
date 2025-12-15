@@ -1,0 +1,451 @@
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": "0d46888a-843a-46f6-ac60-17ae0b1de0b4",
+            "agent": "79760855-e5f7-41e0-bbcd-4c0b85dbaca9",
+            "user": 13,
+            "original_media_url": "uploads/user_13/a4eb0e309d2e496ab53c582a1de630cd.jpg",
+            "created_at": "2025-12-11T08:34:18.754565Z",
+            "channel_posts": [
+                {
+                    "post_id": "e9ffee81-6922-4e4a-a7a6-bf8e3edefa1e",
+                    "channel_type": "google",
+                    "title": "Carousel Post 1",
+                    "content": {
+                        "title": "Carousel Post 1",
+                        "hashtags": [],
+                        "description": ""
+                    },
+                    "caption": null,
+                    "media_url": "uploads/user_13/a4eb0e309d2e496ab53c582a1de630cd.jpg",
+                    "tags": [],
+                    "thumbnail_url": null,
+                    "resize": "1:1",
+                    "metadata": {
+                        "media_urls": [
+                            "uploads/user_13/a4eb0e309d2e496ab53c582a1de630cd.jpg",
+                            "uploads/user_13/f5665ce8a3d24eeeb906e94d7dfed59e.mp4",
+                            "uploads/user_13/cda0fa0a993a41e59e7b38e8e5a5f56f.jpg",
+                            "uploads/user_13/eac361c83a7e4c2c946879fad779ee09.jpg",
+                            "uploads/user_13/c634e59e5e704e24ad9877b8e88c5ed5.mp4"
+                        ]
+                    },
+                    "status": "scheduled",
+                    "scheduled_time": "2025-12-11T14:04:59.330431Z",
+                    "created_at": "2025-12-11T08:34:18.758063Z",
+                    "updated_at": "2025-12-11T08:34:18.758074Z",
+                    "channel": 12
+                },
+                {
+                    "post_id": "457557b5-685a-4bd0-8449-9f11db051ef3",
+                    "channel_type": "youtube",
+                    "title": "Carousel Post 1",
+                    "content": {
+                        "title": "Carousel Post 1",
+                        "hashtags": [],
+                        "description": ""
+                    },
+                    "caption": null,
+                    "media_url": "uploads/user_13/a4eb0e309d2e496ab53c582a1de630cd.jpg",
+                    "tags": [],
+                    "thumbnail_url": null,
+                    "resize": "1:1",
+                    "metadata": {
+                        "media_urls": [
+                            "uploads/user_13/a4eb0e309d2e496ab53c582a1de630cd.jpg",
+                            "uploads/user_13/f5665ce8a3d24eeeb906e94d7dfed59e.mp4",
+                            "uploads/user_13/cda0fa0a993a41e59e7b38e8e5a5f56f.jpg",
+                            "uploads/user_13/eac361c83a7e4c2c946879fad779ee09.jpg",
+                            "uploads/user_13/c634e59e5e704e24ad9877b8e88c5ed5.mp4"
+                        ]
+                    },
+                    "status": "scheduled",
+                    "scheduled_time": "2025-12-12T14:04:59.330431Z",
+                    "created_at": "2025-12-11T08:34:18.757444Z",
+                    "updated_at": "2025-12-11T08:34:18.757455Z",
+                    "channel": 11
+                },
+                {
+                    "post_id": "229ab082-2a17-4c2b-977e-31dbd7bfaff5",
+                    "channel_type": "linkedin",
+                    "title": "Carousel Post 1",
+                    "content": {
+                        "title": "Carousel Post 1",
+                        "hashtags": [],
+                        "description": ""
+                    },
+                    "caption": null,
+                    "media_url": "uploads/user_13/a4eb0e309d2e496ab53c582a1de630cd.jpg",
+                    "tags": [],
+                    "thumbnail_url": null,
+                    "resize": "1:1",
+                    "metadata": {
+                        "media_urls": [
+                            "uploads/user_13/a4eb0e309d2e496ab53c582a1de630cd.jpg",
+                            "uploads/user_13/f5665ce8a3d24eeeb906e94d7dfed59e.mp4",
+                            "uploads/user_13/cda0fa0a993a41e59e7b38e8e5a5f56f.jpg",
+                            "uploads/user_13/eac361c83a7e4c2c946879fad779ee09.jpg",
+                            "uploads/user_13/c634e59e5e704e24ad9877b8e88c5ed5.mp4"
+                        ]
+                    },
+                    "status": "scheduled",
+                    "scheduled_time": "2025-12-13T14:04:59.330431Z",
+                    "created_at": "2025-12-11T08:34:18.756514Z",
+                    "updated_at": "2025-12-11T08:34:18.756527Z",
+                    "channel": 10
+                }
+            ]
+        },
+        {
+            "id": "c5815161-2789-4397-8960-436687957097",
+            "agent": "79760855-e5f7-41e0-bbcd-4c0b85dbaca9",
+            "user": 13,
+            "original_media_url": "uploads/user_13/293844e6edb24fcbace8d385fbfb8663.mp4",
+            "created_at": "2025-12-11T08:34:18.758994Z",
+            "channel_posts": [
+                {
+                    "post_id": "40a6dcd4-5e5a-49b4-b595-befbe69ae3d0",
+                    "channel_type": "google",
+                    "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                    "content": {
+                        "tags": [
+                            "#Cymru",
+                            "#Cynlluniau",
+                            "#Cyffrous",
+                            "#Gweithredu",
+                            "#Cydweithio",
+                            "#Prosiectau",
+                            "#Cymuned",
+                            "#Arloesi",
+                            "#Datblygu",
+                            "#Cysylltwch",
+                            "#GwellCymru",
+                            "#Cynnydd",
+                            "#Cymry",
+                            "#Cymdeithas",
+                            "#Dysgu"
+                        ],
+                        "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                        "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu"
+                    },
+                    "caption": null,
+                    "media_url": "uploads/user_13/293844e6edb24fcbace8d385fbfb8663.mp4",
+                    "tags": [
+                        "#Cymru",
+                        "#Cynlluniau",
+                        "#Cyffrous",
+                        "#Gweithredu",
+                        "#Cydweithio",
+                        "#Prosiectau",
+                        "#Cymuned",
+                        "#Arloesi",
+                        "#Datblygu",
+                        "#Cysylltwch",
+                        "#GwellCymru",
+                        "#Cynnydd",
+                        "#Cymry",
+                        "#Cymdeithas",
+                        "#Dysgu"
+                    ],
+                    "thumbnail_url": null,
+                    "resize": "1:1",
+                    "metadata": {
+                        "ai_prompt": "Yn ddiweddaraf, mae'n rhaid i ni wneud y gynlluniau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Bysicrhau a duhau eto i amguedd hwn, sydd across y byd. Fel y ganddyn ni'n perthysio'r dal terbyn, fyddai'n berthyn jan功. Mae'n llwy bri cyfan ac yn hyd at eich ganlyniadau hefyd. Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch!",
+                        "media_urls": [
+                            "uploads/user_13/293844e6edb24fcbace8d385fbfb8663.mp4",
+                            "uploads/user_13/dcfc14cd995b497c9c785ed2db638108.jpg",
+                            "uploads/user_13/b2fb51a435fd4d6f9b17e782fdb57817.jpg",
+                            "uploads/user_13/9be797f029c0466d885395f4eb9ab596.png",
+                            "uploads/user_13/9a489f947b3a45e9af976dc88ce2b3e1.mp4"
+                        ],
+                        "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu",
+                        "slides_analysis": {
+                            "0": {
+                                "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                                "prompt": "Yn ddiweddaraf, mae'n rhaid i ni wneud y gynlluniau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Bysicrhau a duhau eto i amguedd hwn, sydd across y byd. Fel y ganddyn ni'n perthysio'r dal terbyn, fyddai'n berthyn jan功. Mae'n llwy bri cyfan ac yn hyd at eich ganlyniadau hefyd. Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch!",
+                                "hashtags": [
+                                    "#Cymru",
+                                    "#Cynlluniau",
+                                    "#Cyffrous",
+                                    "#Gweithredu",
+                                    "#Cydweithio",
+                                    "#Prosiectau",
+                                    "#Cymuned",
+                                    "#Arloesi",
+                                    "#Datblygu",
+                                    "#Cysylltwch",
+                                    "#GwellCymru",
+                                    "#Cynnydd",
+                                    "#Cymry",
+                                    "#Cymdeithas",
+                                    "#Dysgu"
+                                ],
+                                "isAnalyzed": true,
+                                "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu",
+                                "thumbnailUrl": "https://s3.ap-northeast-2.amazonaws.com/gopost-dev-file-uploads/frame-thumbnails/7b226c3b62304a07bcb36cab5fceb762.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4LBEIRMETEGITXG5%2F20251211%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20251211T103411Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=27edc5e93cd1a9a6be089d754a60ee66164a4981cbf9bf55a63af97e827d8bf2"
+                            },
+                            "4": {
+                                "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                                "prompt": "Yn ddiweddaraf, mae'n rhaid i ni wneud y gynlluniau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Bysicrhau a duhau eto i amguedd hwn, sydd across y byd. Fel y ganddyn ni'n perthysio'r dal terbyn, fyddai'n berthyn jan功. Mae'n llwy bri cyfan ac yn hyd at eich ganlyniadau hefyd. Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch!",
+                                "hashtags": [
+                                    "#Cymru",
+                                    "#Cynlluniau",
+                                    "#Cyffrous",
+                                    "#Gweithredu",
+                                    "#Cydweithio",
+                                    "#Prosiectau",
+                                    "#Cymuned",
+                                    "#Arloesi",
+                                    "#Datblygu",
+                                    "#Cysylltwch",
+                                    "#GwellCymru",
+                                    "#Cynnydd",
+                                    "#Cymry",
+                                    "#Cymdeithas",
+                                    "#Dysgu"
+                                ],
+                                "isAnalyzed": true,
+                                "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu",
+                                "thumbnailUrl": "https://s3.ap-northeast-2.amazonaws.com/gopost-dev-file-uploads/frame-thumbnails/3c4eef4014824288b6a955f0198cd104.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4LBEIRMETEGITXG5%2F20251211%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20251211T103425Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=be149bf546f4364b178e6fb9875f3a8566c835961f92013b6f7328ebdf7d0fc2"
+                            }
+                        }
+                    },
+                    "status": "scheduled",
+                    "scheduled_time": "2025-12-12T08:37:00Z",
+                    "created_at": "2025-12-11T08:34:18.760660Z",
+                    "updated_at": "2025-12-11T08:34:18.760669Z",
+                    "channel": 12
+                },
+                {
+                    "post_id": "1a45276a-029e-4a82-9934-731a2472aa1f",
+                    "channel_type": "youtube",
+                    "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                    "content": {
+                        "tags": [
+                            "#Cymru",
+                            "#Cynlluniau",
+                            "#Cyffrous",
+                            "#Gweithredu",
+                            "#Cydweithio",
+                            "#Prosiectau",
+                            "#Cymuned",
+                            "#Arloesi",
+                            "#Datblygu",
+                            "#Cysylltwch",
+                            "#GwellCymru",
+                            "#Cynnydd",
+                            "#Cymry",
+                            "#Cymdeithas",
+                            "#Dysgu"
+                        ],
+                        "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                        "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu"
+                    },
+                    "caption": null,
+                    "media_url": "uploads/user_13/293844e6edb24fcbace8d385fbfb8663.mp4",
+                    "tags": [
+                        "#Cymru",
+                        "#Cynlluniau",
+                        "#Cyffrous",
+                        "#Gweithredu",
+                        "#Cydweithio",
+                        "#Prosiectau",
+                        "#Cymuned",
+                        "#Arloesi",
+                        "#Datblygu",
+                        "#Cysylltwch",
+                        "#GwellCymru",
+                        "#Cynnydd",
+                        "#Cymry",
+                        "#Cymdeithas",
+                        "#Dysgu"
+                    ],
+                    "thumbnail_url": null,
+                    "resize": "1:1",
+                    "metadata": {
+                        "ai_prompt": "Yn ddiweddaraf, mae'n rhaid i ni wneud y gynlluniau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Bysicrhau a duhau eto i amguedd hwn, sydd across y byd. Fel y ganddyn ni'n perthysio'r dal terbyn, fyddai'n berthyn jan功. Mae'n llwy bri cyfan ac yn hyd at eich ganlyniadau hefyd. Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch!",
+                        "media_urls": [
+                            "uploads/user_13/293844e6edb24fcbace8d385fbfb8663.mp4",
+                            "uploads/user_13/dcfc14cd995b497c9c785ed2db638108.jpg",
+                            "uploads/user_13/b2fb51a435fd4d6f9b17e782fdb57817.jpg",
+                            "uploads/user_13/9be797f029c0466d885395f4eb9ab596.png",
+                            "uploads/user_13/9a489f947b3a45e9af976dc88ce2b3e1.mp4"
+                        ],
+                        "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu",
+                        "slides_analysis": {
+                            "0": {
+                                "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                                "prompt": "Yn ddiweddaraf, mae'n rhaid i ni wneud y gynlluniau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Bysicrhau a duhau eto i amguedd hwn, sydd across y byd. Fel y ganddyn ni'n perthysio'r dal terbyn, fyddai'n berthyn jan功. Mae'n llwy bri cyfan ac yn hyd at eich ganlyniadau hefyd. Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch!",
+                                "hashtags": [
+                                    "#Cymru",
+                                    "#Cynlluniau",
+                                    "#Cyffrous",
+                                    "#Gweithredu",
+                                    "#Cydweithio",
+                                    "#Prosiectau",
+                                    "#Cymuned",
+                                    "#Arloesi",
+                                    "#Datblygu",
+                                    "#Cysylltwch",
+                                    "#GwellCymru",
+                                    "#Cynnydd",
+                                    "#Cymry",
+                                    "#Cymdeithas",
+                                    "#Dysgu"
+                                ],
+                                "isAnalyzed": true,
+                                "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu",
+                                "thumbnailUrl": "https://s3.ap-northeast-2.amazonaws.com/gopost-dev-file-uploads/frame-thumbnails/7b226c3b62304a07bcb36cab5fceb762.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4LBEIRMETEGITXG5%2F20251211%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20251211T103411Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=27edc5e93cd1a9a6be089d754a60ee66164a4981cbf9bf55a63af97e827d8bf2"
+                            },
+                            "4": {
+                                "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                                "prompt": "Yn ddiweddaraf, mae'n rhaid i ni wneud y gynlluniau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Bysicrhau a duhau eto i amguedd hwn, sydd across y byd. Fel y ganddyn ni'n perthysio'r dal terbyn, fyddai'n berthyn jan功. Mae'n llwy bri cyfan ac yn hyd at eich ganlyniadau hefyd. Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch!",
+                                "hashtags": [
+                                    "#Cymru",
+                                    "#Cynlluniau",
+                                    "#Cyffrous",
+                                    "#Gweithredu",
+                                    "#Cydweithio",
+                                    "#Prosiectau",
+                                    "#Cymuned",
+                                    "#Arloesi",
+                                    "#Datblygu",
+                                    "#Cysylltwch",
+                                    "#GwellCymru",
+                                    "#Cynnydd",
+                                    "#Cymry",
+                                    "#Cymdeithas",
+                                    "#Dysgu"
+                                ],
+                                "isAnalyzed": true,
+                                "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu",
+                                "thumbnailUrl": "https://s3.ap-northeast-2.amazonaws.com/gopost-dev-file-uploads/frame-thumbnails/3c4eef4014824288b6a955f0198cd104.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4LBEIRMETEGITXG5%2F20251211%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20251211T103425Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=be149bf546f4364b178e6fb9875f3a8566c835961f92013b6f7328ebdf7d0fc2"
+                            }
+                        }
+                    },
+                    "status": "scheduled",
+                    "scheduled_time": "2025-12-12T08:37:00Z",
+                    "created_at": "2025-12-11T08:34:18.760096Z",
+                    "updated_at": "2025-12-11T08:34:18.760106Z",
+                    "channel": 11
+                },
+                {
+                    "post_id": "0dfb25be-8502-42c1-b5a3-34d8ac10d988",
+                    "channel_type": "linkedin",
+                    "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                    "content": {
+                        "tags": [
+                            "#Cymru",
+                            "#Cynlluniau",
+                            "#Cyffrous",
+                            "#Gweithredu",
+                            "#Cydweithio",
+                            "#Prosiectau",
+                            "#Cymuned",
+                            "#Arloesi",
+                            "#Datblygu",
+                            "#Cysylltwch",
+                            "#GwellCymru",
+                            "#Cynnydd",
+                            "#Cymry",
+                            "#Cymdeithas",
+                            "#Dysgu"
+                        ],
+                        "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                        "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu"
+                    },
+                    "caption": null,
+                    "media_url": "uploads/user_13/293844e6edb24fcbace8d385fbfb8663.mp4",
+                    "tags": [
+                        "#Cymru",
+                        "#Cynlluniau",
+                        "#Cyffrous",
+                        "#Gweithredu",
+                        "#Cydweithio",
+                        "#Prosiectau",
+                        "#Cymuned",
+                        "#Arloesi",
+                        "#Datblygu",
+                        "#Cysylltwch",
+                        "#GwellCymru",
+                        "#Cynnydd",
+                        "#Cymry",
+                        "#Cymdeithas",
+                        "#Dysgu"
+                    ],
+                    "thumbnail_url": null,
+                    "resize": "1:1",
+                    "metadata": {
+                        "ai_prompt": "Yn ddiweddaraf, mae'n rhaid i ni wneud y gynlluniau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Bysicrhau a duhau eto i amguedd hwn, sydd across y byd. Fel y ganddyn ni'n perthysio'r dal terbyn, fyddai'n berthyn jan功. Mae'n llwy bri cyfan ac yn hyd at eich ganlyniadau hefyd. Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch!",
+                        "media_urls": [
+                            "uploads/user_13/293844e6edb24fcbace8d385fbfb8663.mp4",
+                            "uploads/user_13/dcfc14cd995b497c9c785ed2db638108.jpg",
+                            "uploads/user_13/b2fb51a435fd4d6f9b17e782fdb57817.jpg",
+                            "uploads/user_13/9be797f029c0466d885395f4eb9ab596.png",
+                            "uploads/user_13/9a489f947b3a45e9af976dc88ce2b3e1.mp4"
+                        ],
+                        "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu",
+                        "slides_analysis": {
+                            "0": {
+                                "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                                "prompt": "Yn ddiweddaraf, mae'n rhaid i ni wneud y gynlluniau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Bysicrhau a duhau eto i amguedd hwn, sydd across y byd. Fel y ganddyn ni'n perthysio'r dal terbyn, fyddai'n berthyn jan功. Mae'n llwy bri cyfan ac yn hyd at eich ganlyniadau hefyd. Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch!",
+                                "hashtags": [
+                                    "#Cymru",
+                                    "#Cynlluniau",
+                                    "#Cyffrous",
+                                    "#Gweithredu",
+                                    "#Cydweithio",
+                                    "#Prosiectau",
+                                    "#Cymuned",
+                                    "#Arloesi",
+                                    "#Datblygu",
+                                    "#Cysylltwch",
+                                    "#GwellCymru",
+                                    "#Cynnydd",
+                                    "#Cymry",
+                                    "#Cymdeithas",
+                                    "#Dysgu"
+                                ],
+                                "isAnalyzed": true,
+                                "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu",
+                                "thumbnailUrl": "https://s3.ap-northeast-2.amazonaws.com/gopost-dev-file-uploads/frame-thumbnails/7b226c3b62304a07bcb36cab5fceb762.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4LBEIRMETEGITXG5%2F20251211%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20251211T103411Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=27edc5e93cd1a9a6be089d754a60ee66164a4981cbf9bf55a63af97e827d8bf2"
+                            },
+                            "4": {
+                                "title": "Gynlluniau Cyffrous ar gyfer Cymru",
+                                "prompt": "Yn ddiweddaraf, mae'n rhaid i ni wneud y gynlluniau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Rydyn ni'n dechrau'n dda iawn, ac mae'n rhaid i ni ddweud y pethau sydd ar gael yng Nghymru. Bysicrhau a duhau eto i amguedd hwn, sydd across y byd. Fel y ganddyn ni'n perthysio'r dal terbyn, fyddai'n berthyn jan功. Mae'n llwy bri cyfan ac yn hyd at eich ganlyniadau hefyd. Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Rydyn ni wedi llani, rydych yn agfa o safbwrdd ffyddau fel rhaid i ni ddechrau. Hawdd fy nghudd. Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch! Cysylltiwch â mi nawr! Cysylltiwch!",
+                                "hashtags": [
+                                    "#Cymru",
+                                    "#Cynlluniau",
+                                    "#Cyffrous",
+                                    "#Gweithredu",
+                                    "#Cydweithio",
+                                    "#Prosiectau",
+                                    "#Cymuned",
+                                    "#Arloesi",
+                                    "#Datblygu",
+                                    "#Cysylltwch",
+                                    "#GwellCymru",
+                                    "#Cynnydd",
+                                    "#Cymry",
+                                    "#Cymdeithas",
+                                    "#Dysgu"
+                                ],
+                                "isAnalyzed": true,
+                                "description": "Yn y fideo hwn, byddwn yn archwilio'r cynlluniau cyffrous sydd ar gael yng Nghymru. Rydym yn dechrau'n dda iawn, gan drafod y cyfleoedd a'r heriau sy'n ein hwynebu. Dewch i ddysgu am y prosiectau sydd yn dod i'r amlwg a sut gallwn ni gydweithio i greu Cymru gwell. Cysylltwch â ni i gael mwy o wybodaeth a rhannu eich syniadau!\n\n#Cymru #Cynlluniau #Cyffrous #Gweithredu #Cydweithio #Prosiectau #Cymuned #Arloesi #Datblygu #Cysylltwch #GwellCymru #Cynnydd #Cymry #Cymdeithas #Dysgu",
+                                "thumbnailUrl": "https://s3.ap-northeast-2.amazonaws.com/gopost-dev-file-uploads/frame-thumbnails/3c4eef4014824288b6a955f0198cd104.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4LBEIRMETEGITXG5%2F20251211%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20251211T103425Z&X-Amz-Expires=432000&X-Amz-SignedHeaders=host&X-Amz-Signature=be149bf546f4364b178e6fb9875f3a8566c835961f92013b6f7328ebdf7d0fc2"
+                            }
+                        }
+                    },
+                    "status": "scheduled",
+                    "scheduled_time": "2025-12-12T08:37:00Z",
+                    "created_at": "2025-12-11T08:34:18.759509Z",
+                    "updated_at": "2025-12-11T08:34:18.759518Z",
+                    "channel": 10
+                }
+            ]
+        }
+    ]
+}

@@ -8,6 +8,7 @@ const PATHS = {
   CHANNEL: "channels/",
   AI: "scheduler/smart/",
   MEDIA_ENGINE: "media/",
+  CALENDAR: "agents/calendar/",
 } as const;
 
 const createUrl = (path: string): string => `${BASE_URL}/${path}`;
@@ -27,6 +28,8 @@ interface AgentUrls {
   PATCH_POST: (agentId: string, postId: string) => string;
   CAROUSEL_POSTS: (id: string) => string;
   CROSS_POST: (id: string) => string;
+  GENERATE_POST_METADATA: (agentId: string, postId: string) => string;
+  
 }
 
 interface ChannelUrls {
@@ -60,6 +63,10 @@ interface MediaEngineUrls {
   ANALYZE_MEDIA_URL: string;
 }
 
+interface CalendarUrls {
+  GET_EVENTS: string; 
+}
+
 const URLS = {
   // ... (baki URLs jaise AUTH, AGENTS, etc.) ...
   BACKEND_URL: BASE_URL,
@@ -78,6 +85,8 @@ const URLS = {
     CAROUSEL_POSTS: (id: string) =>
       createUrl(`${PATHS.AGENTS}/${id}/carousel-posts/`),
     CROSS_POST: (id: string) => createUrl(`${PATHS.AGENTS}/${id}/cross-post/`),
+    GENERATE_POST_METADATA: (agentId: string, postId: string) =>
+      createUrl(`${PATHS.AGENTS}/${agentId}/posts/${postId}/generate-metadata/`),
   } as AgentUrls,
   CHANNELS: {
     GET_CHANNEL: createUrl(`${PATHS.CHANNEL}`),
@@ -115,6 +124,9 @@ const URLS = {
     ANALYZE_MEDIA_URL: createUrl(`${PATHS.MEDIA_ENGINE}analyze-media-url/`),
 
   } as MediaEngineUrls,
+  CALENDAR: {
+    GET_EVENTS: createUrl(`${PATHS.CALENDAR}events/`),
+  } as CalendarUrls,
 };
 
 export const AUTH_URLS = URLS.AUTH;
@@ -122,4 +134,5 @@ export const AGENT_URLS = URLS.AGENTS;
 export const WORKSPACE_URLS = URLS.WORKSPACES;
 export const CHANNEL_URL = URLS.CHANNELS;
 export const MEDIA_ENGINE_URLS = URLS.MEDIA_ENGINE;
+export const CALENDAR_URLS = URLS.CALENDAR;
 export default URLS;

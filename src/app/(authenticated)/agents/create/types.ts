@@ -45,7 +45,7 @@ export  type channel_posts_carousel ={
   caption: string[];      // caption from representative post
   channelId: number | string | null; // Store the channel ID for schedule patching
   tags:string[];
-  status: 'published' | 'uploading' | 'failed' | 'pending' | 'scheduled' | 'uploaded' ;
+  status: 'published' | 'uploading' | 'failed' | 'pending' | 'scheduled' | 'uploaded' |'approved' ;
   source: string;
   scheduleTime?: string;
   uploadProgress?: number;

@@ -166,7 +166,7 @@ export default function AgentCard(props: props) {
           <Badge
             variant="outline"
             className={classNames(
-              "first-letter:uppercase w-fit h-fit px-2 py-0.5 font-medium rounded-md text-[11px] flex items-center justify-center leading-none border-0",
+              "first-letter:uppercase w-fit h-fit px-2 py-0.5 font-medium rounded-md text-[11px] flex items-center justify-center leading-none border-0 capitalize",
               props.AgentCardDetails.status.toLowerCase() == "live" && "text-[#008236] bg-[#F0FDF4]",
               props.AgentCardDetails.status.toLowerCase() == "draft" && "text-[#A66000] bg-[#FEFCE8]",
               props.AgentCardDetails.status.toLowerCase() == "paused" && "text-[#E7000B] bg-[#FEF2F2]",

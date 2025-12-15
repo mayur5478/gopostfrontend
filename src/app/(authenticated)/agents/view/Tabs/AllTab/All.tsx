@@ -1,50 +1,71 @@
-// src/app/(authenticated)/agents/view/Tabs/All.tsx
+// src/app/(authenticated)/agents/view/Tabs/AllTab/All.tsx
 
 "use client";
-import React, { Dispatch } from "react";
-import api from "@/lib/axios";
-import { useEffect, useState } from "react";
-import { AgentData, Settings } from "../../../list/types";
-import { AccountType, PostType, Channel_Posts } from "../../../create/types";
-import { AGENT_URLS, CHANNEL_URL } from "@/lib/urls"; // Import AGENT_URLS for patching schedule
+import React from "react";
+import { AgentData } from "../../../list/types";
+import { PostType, CarouselPostDetails } from "../../../create/types";
 import CarouselAll from "./CarouselAll";
 import AllPostFromComp from "./AllPostFromComp";
-import { CarouselPostDetails } from "../../../create/types";
+import CrossPostAll from "./CrossPostAll"; // Import the new component
 
-// Props for the All component
 type Props = {
   AgentData: AgentData;
   selectedPosts: PostType[];
   selectedCPosts: CarouselPostDetails[];
+  // You might need a specific state for selectedCrossPosts if the type differs, 
+  // otherwise reuse selectedPosts if the structure is the same.
   setSelectedPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
-  setSelectedCPosts: React.Dispatch<
-    React.SetStateAction<CarouselPostDetails[]>
-  >;
+  setSelectedCPosts: React.Dispatch<React.SetStateAction<CarouselPostDetails[]>>;
   refreshKey: number;
+  onRefresh: () => void; 
 };
 
 export default function All(props: Props) {
-  // const [carouselPosts, setCarouselPosts] = useState<CarouselPostDetails[]>([]);
-  // const [posts, setPosts] = useState<PostType[]>([]);
-  // console.log("carouselPosts",carouselPosts);
+  
+  // Logic to determine which view to show
+  const renderContent = () => {
+    switch (props.AgentData.type) {
+      case "create_carousel_or_slider":
+        return (
+          <CarouselAll
+            key={props.refreshKey}
+            refreshKey={props.refreshKey}
+            AgentData={props.AgentData}
+            selectedCPosts={props.selectedCPosts}
+            setSelectedCPosts={props.setSelectedCPosts}
+            onRefresh={props.onRefresh}
+          />
+        );
+      
+      // Add your Cross Post Condition here
+      case "cross_post": 
+      // OR whatever your backend string is for this agent type
+        return (
+          <CrossPostAll
+            refreshKey={props.refreshKey}
+            AgentData={props.AgentData}
+            // Assuming CrossPosts share the PostType structure:
+            selectedCrossPosts={props.selectedPosts} 
+            setSelectedCrossPosts={props.setSelectedPosts}
+          />
+        );
+
+      default:
+        return (
+          <AllPostFromComp
+            refreshKey={props.refreshKey}
+            AgentData={props.AgentData}
+            selectedPosts={props.selectedPosts}
+            setSelectedPosts={props.setSelectedPosts}
+            onRefresh={props.onRefresh}
+          />
+        );
+    }
+  };
 
   return (
     <>
-      {props.AgentData.type == "create_carousel_or_slider" ? (
-        <CarouselAll
-          key={props.refreshKey}
-          AgentData={props.AgentData}
-          selectedCPosts={props.selectedCPosts}
-          setSelectedCPosts={props.setSelectedCPosts}
-        />
-      ) : (
-        <AllPostFromComp
-          refreshKey={props.refreshKey}
-          AgentData={props.AgentData}
-          selectedPosts={props.selectedPosts}
-          setSelectedPosts={props.setSelectedPosts}
-        />
-      )}
+      {renderContent()}
     </>
   );
 }

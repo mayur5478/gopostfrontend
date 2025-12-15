@@ -2,10 +2,9 @@
 
 import { Checkbox } from "@/components/ui/checkbox";
 import Post from "../../Posts/Post";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import api from "@/lib/axios";
-import { useEffect, useState } from "react";
 import { AgentData } from "../../../list/types";
 import {
   AccountType,
@@ -13,13 +12,14 @@ import {
 } from "../../../create/types";
 import {
   Dialog,
-  DialogContent,
   DialogOverlay,
   DialogPortal,
 } from "@/components/ui/dialog";
-import PostSetting from "@/app/(authenticated)/postsetting/PostSetting";
-import { Loader2, X } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { AGENT_URLS, CHANNEL_URL } from "@/lib/urls";
+
+// --- CHANGED: Import the NEW CrossPostSetting component ---
+import CrossPostSetting from "@/app/(authenticated)/postsetting/CrossPostSetting"; 
 
 // Utility function to fetch presigned URL from file_key
 async function fetchPresignedUrl(
@@ -36,93 +36,74 @@ async function fetchPresignedUrl(
     return response.data.download_url;
   } catch (error) {
     console.error("Failed to fetch presigned URL:", error);
-    // Return the file_key as fallback if presigned URL fetch fails
     return fileKey;
   }
 }
 
-// Helper function to check if a URL is an S3 file key (starts with "uploads/")
 function isFileKey(url: string): boolean {
+  if (!url) return false;
   return url.startsWith("uploads/") || !url.includes("://");
 }
 
 type Props = {
   AgentData: AgentData;
-  selectedPosts: PostType[];
-  setSelectedPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
+  selectedCrossPosts: PostType[];
+  setSelectedCrossPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
   refreshKey: number;
-    onRefresh: () => void; 
 };
 
- export default function AllPostFromComp(props: Props) {
+export default function CrossPostAll(props: Props) {
   const [openPostSetting, setOpenPostSetting] = useState(false);
   const [clickedPost, setClickedPost] = useState<PostType | null>(null);
-  const [refreshKey, setRefreshKey] = useState(0);
-
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<PostType[]>([]);
+
+  const selectedPosts = props.selectedCrossPosts ?? [];
 
   async function fetchPostsOfAnAgent() {
     try {
       setLoading(true);
-      //get all channels of this user
       let channel = await api.get(CHANNEL_URL.GET_CHANNEL);
-      console.log("get all channels", channel.data.results);
+      const channelsData = channel.data.results || [];
+
       const { data } = await api.get(AGENT_URLS.POSTS(props.AgentData.id));
 
-      // Correctly flatten the nested post structure
       const allPosts: PostType[] = await Promise.all(
         data.results.flatMap(async (masterPost: any) => {
-          {
-            // Fetch presigned URL for original_media_url if it's a file key
+          
             let originalMediaUrl = masterPost.original_media_url;
-            if (originalMediaUrl && isFileKey(originalMediaUrl)) {
+            const isInternalOriginal = isFileKey(originalMediaUrl);
+
+            if (isInternalOriginal) {
               try {
                 originalMediaUrl = await fetchPresignedUrl(originalMediaUrl);
               } catch (error) {
-                console.error(
-                  `Failed to fetch presigned URL for ${masterPost.original_media_url}:`,
-                  error
-                );
+                console.error(`Failed to fetch presigned URL for ${masterPost.original_media_url}:`, error);
               }
             }
 
             const posts = await Promise.all(
               masterPost.channel_posts.map(async (post: any) => {
-                const platform = channel.data.results.find(
+                const platform = channelsData.find(
                   (ch: AccountType) => ch.id == post.channel
                 );
-                // Use the media URL directly (backend should return full URLs)
+                
                 let fullMediaUrl = post.media_url;
                 if (fullMediaUrl && isFileKey(fullMediaUrl)) {
-                  try {
-                    fullMediaUrl = await fetchPresignedUrl(fullMediaUrl);
-                  } catch (error) {
-                    console.error(
-                      `Failed to fetch presigned URL for ${post.media_url}:`,
-                      error
-                    );
-                  }
+                  fullMediaUrl = await fetchPresignedUrl(fullMediaUrl);
                 }
+
                 let fullThumbnailUrl = post.thumbnail_url;
                 if (fullThumbnailUrl && isFileKey(fullThumbnailUrl)) {
-                  try {
-                    fullThumbnailUrl = await fetchPresignedUrl(
-                      fullThumbnailUrl
-                    );
-                  } catch (error) {
-                    console.error(
-                      `Failed to fetch presigned URL for ${post.media_url}:`,
-                      error
-                    );
-                  }
+                  fullThumbnailUrl = await fetchPresignedUrl(fullThumbnailUrl);
                 }
+
                 return {
                   postId: post.post_id,
                   title: post.title,
                   mediaUrl: fullMediaUrl,
                   status: post.status,
-                  content:post.content,
+                  content: post.content,
                   caption: Array.isArray(post.caption)
                     ? post.caption
                     : post.caption
@@ -143,75 +124,73 @@ type Props = {
                 };
               })
             );
+
+            if ((!originalMediaUrl || !isInternalOriginal) && posts.length > 0) {
+               originalMediaUrl = posts[0].thumbnailUrl || posts[0].mediaUrl || originalMediaUrl;
+            }
+
             return {
               mainId: masterPost.id,
               agent: masterPost.agent,
               mediaUrl: originalMediaUrl,
               posts: posts,
             };
-          }
+          
         })
       );
-setPosts(allPosts);
-      // setPosts((prev) => {
-      //   const sameLength = prev.length === allPosts.length;
-      //   const sameIds = sameLength && prev.every((p, i) => p.mainId === allPosts[i].mainId);
-      //   if (sameIds) return prev;
-      //   return allPosts;
-      // });
 
-      console.log("response inside All tab data here", allPosts);
+      setPosts((prev) => {
+        const sameLength = prev.length === allPosts.length;
+        const sameIds = sameLength && prev.every((p, i) => p.mainId === allPosts[i].mainId);
+        if (sameIds) return prev;
+        return allPosts;
+      });
+
     } catch (err) {
-      console.error("Failed to fetch posts:", err);
+      console.error("Failed to fetch cross posts:", err);
     } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => {
-    // setLoading(true);
     fetchPostsOfAnAgent();
-  
   }, [props.AgentData, props.refreshKey]);
 
   const handleEditClick = (post: PostType) => {
-    console.log("AllPostFromComp: opening modal for", post.mainId);
     setClickedPost(post);
     setOpenPostSetting(true);
   };
 
   const toggleSelect = (post: PostType) => {
-    props.setSelectedPosts((prevSelected) => {
+    props.setSelectedCrossPosts((prevSelected) => {
       const isAlreadySelected = prevSelected.some(
         (p) => p.mainId === post.mainId
       );
       if (isAlreadySelected) {
-        // remove the post
         return prevSelected.filter((p) => p.mainId !== post.mainId);
       } else {
-        // add the post
         return [...prevSelected, post];
       }
     });
   };
 
-  //  Select or deselect all
   const toggleSelectAll = (checked: boolean) => {
     if (checked) {
-      // Select all posts
-      props.setSelectedPosts(posts);
+      props.setSelectedCrossPosts(posts);
     } else {
-      // Deselect all
-      props.setSelectedPosts([]);
+      props.setSelectedCrossPosts([]);
     }
   };
 
   const selectAllChecked =
-    props.selectedPosts.length === posts.length && posts.length > 0;
+    selectedPosts.length === posts.length && posts.length > 0;
+  
   const selectAllPartial =
-    props.selectedPosts.length > 0 && props.selectedPosts.length < posts.length;
+    selectedPosts.length > 0 && selectedPosts.length < posts.length;
 
   const selectAllRef = useRef<HTMLButtonElement>(null);
+  
   useEffect(() => {
     if (selectAllRef.current) {
       (selectAllRef.current as any).indeterminate = selectAllPartial;
@@ -220,12 +199,19 @@ setPosts(allPosts);
 
   if (loading)
     return (
-<div className="w-full flex-1 flex flex-col justify-center items-center text-xl text-gray-600 animate-fadeIn">
-  <Loader2 className="h-10 w-10 animate-spin text-[#FDE047] mb-3" />
-  <p className="text-base animate-pulse">Getting all posts...</p>
-</div>
-
+      <div className="w-full flex-1 flex flex-col justify-center items-center text-xl text-gray-600 animate-fadeIn">
+        <Loader2 className="h-10 w-10 animate-spin text-[#FDE047] mb-3" />
+        <p className="text-base animate-pulse">Getting cross posts...</p>
+      </div>
     );
+
+  if (!loading && posts.length === 0) {
+    return (
+        <div className="w-full flex flex-col justify-center items-center py-10 text-gray-500">
+            <p>No posts found for this agent.</p>
+        </div>
+    )
+  }
 
   return (
     <div className="allContent flex flex-col w-full p-[1.3rem]">
@@ -238,12 +224,12 @@ setPosts(allPosts);
           onCheckedChange={(checked: boolean) => toggleSelectAll(checked)}
         />
         <Label htmlFor="selectAll" className="cursor-pointer w-full">
-          Select All ({props.selectedPosts.length} selected)
+          Select All ({selectedPosts.length} selected)
         </Label>
       </div>
       <div className="flex flex-col gap-3 w-full">
         {posts
-          .filter((card) => card && card.mainId) // Filter out posts without an ID
+          .filter((card) => card && card.mainId) 
           .map((card: PostType) => (
             <div
               key={card.mainId}
@@ -252,7 +238,7 @@ setPosts(allPosts);
               <Checkbox
                 className="border-2 border-[#E1E4EA]"
                 id={card.mainId}
-                checked={props.selectedPosts.some(
+                checked={selectedPosts.some(
                   (p) => p.mainId === card.mainId
                 )}
                 onCheckedChange={() => toggleSelect(card)}
@@ -260,17 +246,10 @@ setPosts(allPosts);
               <Label
                 htmlFor={card.mainId}
                 className="cursor-pointer w-full"
-                onClick={() => {
-                  // setOpenPostSetting(true);
-                  // setClickedPost(card);
-                }}
               >
                 <Post
                   postDetails={card}
                   posts={posts}
-                  // onRefresh={fetchPostsOfAnAgent}
-                  // onOpenPostSetting={openPostSetting}
-                  // setOpenPostSetting={setOpenPostSetting}
                   onEdit={() => handleEditClick(card)}
                 />
               </Label>
@@ -278,23 +257,20 @@ setPosts(allPosts);
           ))}
       </div>
 
-  <Dialog open={openPostSetting} onOpenChange={(open) => setOpenPostSetting(open)}>
+      <Dialog open={openPostSetting} onOpenChange={(open) => setOpenPostSetting(open)}>
         <DialogPortal>
           <DialogOverlay className="fixed inset-0 bg-black/30 z-40" />
           <div className="fixed inset-0 w-screen h-screen bg-white rounded-t-xl shadow-lg overflow-y-auto z-50 animate-in slide-in-from-bottom-10">
-            {/* Key the PostSetting by activePost.mainId to force remount on change */}
             {clickedPost ? (
-              <PostSetting
+              // --- CHANGED: Use CrossPostSetting here ---
+              <CrossPostSetting
                 key={clickedPost.mainId}
                 post={clickedPost}
                 posts={posts}
                 onClose={() => {
                   setOpenPostSetting(false);
-                  // Refresh posts after close
-                  // fetchPostsOfAnAgent();
+                  fetchPostsOfAnAgent();
                 }}
-                  onSave={() => props.onRefresh()}   // new line
-
               />
             ) : (
               <div className="p-6">No post selected</div>

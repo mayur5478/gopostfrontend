@@ -25,7 +25,7 @@ import PostSetting from "@/app/(authenticated)/postsetting/PostSetting";
 type props = {
   postDetails: PostType;
   posts: PostType[];
-  onRefresh?: () => void;
+  //onRefresh?: () => void;
   // openPostSetting: boolean;
   // setOpenPostSetting:Dispatch<SetStateAction<boolean>>;
     onEdit: () => void;
@@ -262,7 +262,7 @@ const [selectedPostForModal, setSelectedPostForModal] = useState<PostType>(props
             <Badge
               variant="outline"
               className={classNames(
-                "w-fit h-fit font-medium rounded test-[9px] flex items-center justify-center leading-none",
+                "w-fit h-fit font-medium rounded test-[9px] flex items-center justify-center leading-none capitalize",
                 props.postDetails.posts[0].status == "published" &&
                 "border-[#00C950] text-[#008236] bg-[#F0FDF4]",
                 props.postDetails.posts[0].status.includes("scheduled") &&
@@ -276,7 +276,7 @@ const [selectedPostForModal, setSelectedPostForModal] = useState<PostType>(props
               )}
             >
               {" "}
-              {props.postDetails.posts[0].status.charAt(0).toUpperCase().concat(props.postDetails.posts[0].status.substring(1,props.postDetails.posts[0].status.length))}
+              {props.postDetails.posts[0].status}
             </Badge>
           </div>
           {/* <div className="timeAndDate"> {formatDateTime(date, time)}</div> */}

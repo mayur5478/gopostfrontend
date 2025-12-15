@@ -1,4 +1,3 @@
-// src/components/ui/sidebar.tsx
 "use client";
 
 import * as React from "react";
@@ -572,12 +571,13 @@ function SidebarContent({ isCollapsed = false, onToggleCollapse }: SidebarConten
               href="/agents/list" // Link to agent list page
               isCollapsed={isCollapsed}
             />
+            {/* ENABLED CALENDAR */}
             <SidebarItem
               icon={<Calendar size={16} color="#5B5B64" />}
               label="Calendar"
               href="/calendar"
               isCollapsed={isCollapsed}
-              disabled={true} // Keep disabled for now
+              disabled={false} 
             />
           </SidebarSection>
 

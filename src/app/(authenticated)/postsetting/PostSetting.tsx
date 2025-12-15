@@ -27,6 +27,8 @@ type Props = {
   post: PostType;
   posts: PostType[];
   onClose: () => void;
+  onSave: () => void; 
+
 };
 
 type AspectRatio = "square" | "vertical" | "horizontal";
@@ -63,29 +65,16 @@ const getMediaType = (post: PostType | undefined): boolean => {
   if (!post.mediaUrl) return false;
   const lower = post.mediaUrl.toLowerCase();
   const videoExtensions = [
-    ".mp4",
-    ".mov",
-    ".ts",
-    ".avi",
-    ".mkv",
-    ".mpeg",
-    ".wmv",
-    ".flv",
-    ".f4v",
-    ".3gp",
-    ".m4v",
-    ".m2ts",
-    ".mpg",
-    ".ogv",
-    ".webm",
-    ".vob",
-    ".mxf",
-    ".mts",
+    ".mp4", ".mov",".ts",".avi",
+    ".mkv",".mpeg",".wmv",".flv",
+    ".f4v", ".3gp",".m4v",".m2ts",
+    ".mpg",".ogv",".webm", ".vob",
+    ".mxf",".mts",
   ];
   return videoExtensions.some((ext) => lower.includes(ext));
 };
 
-export default function PostSetting({ post, posts, onClose }: Props) {
+export default function PostSetting({ post, posts, onClose, onSave }: Props) {
   const platforms = post.posts.map((p: any) => ({
     id: p.platform.id,
     name:
@@ -96,8 +85,8 @@ export default function PostSetting({ post, posts, onClose }: Props) {
       p.platform.channel_type === "facebook"
         ? FaFacebook
         : p.platform.channel_type === "linkedin"
-        ? FaLinkedin
-        : null,
+          ? FaLinkedin
+          : null,
   }));
 
   const [selectedPost, setSelectedPost] = useState<PostType>(post);
@@ -188,7 +177,6 @@ export default function PostSetting({ post, posts, onClose }: Props) {
       }
     });
 
-    // 🔥 important: Content tab ko bhi fill karo ek master view ke liye
     const anyKey =
       Object.keys(newTitles)[0] ||
       Object.keys(newDescs)[0] ||
@@ -388,6 +376,7 @@ export default function PostSetting({ post, posts, onClose }: Props) {
         payload
       );
       toast.success("Saved!");
+      onSave();
       onClose();
     } catch (error) {
       console.error(error);
@@ -419,11 +408,10 @@ export default function PostSetting({ post, posts, onClose }: Props) {
               variant="outline"
               disabled={isSaving}
               onClick={handleSaveChanges}
-              className={`rounded-2xl flex items-center gap-2 px-4 transition-all ${
-                isSaving
+              className={`rounded-2xl flex items-center gap-2 px-4 transition-all ${isSaving
                   ? "bg-[#FDE047]/70 cursor-not-allowed"
                   : "bg-[#FDE047] hover:bg-[#FDE047]/90"
-              }`}
+                }`}
             >
               {isSaving ? (
                 <Loader2 className="w-4 h-4 animate-spin text-black" />
@@ -458,11 +446,10 @@ export default function PostSetting({ post, posts, onClose }: Props) {
                   onClick={() => {
                     setSelectedPost(p);
                   }}
-                  className={`relative w-[56px] h-[56px] rounded-md flex items-center justify-center cursor-pointer transition-all ${
-                    isSelected
+                  className={`relative w-[56px] h-[56px] rounded-md flex items-center justify-center cursor-pointer transition-all ${isSelected
                       ? "border-2 border-[#FDE047]"
                       : "border border-gray-200 hover:border-[#FDE047]/70"
-                  }`}
+                    }`}
                 >
                   <div className="relative w-[50px] h-[50px] rounded-md overflow-hidden bg-gray-100">
                     {isVideoItem ? (
@@ -569,6 +556,7 @@ export default function PostSetting({ post, posts, onClose }: Props) {
               setResizedAspect={setResizedAspect}
               updatedMedia={updatedMedia}
               setUpdatedMedia={setUpdatedMedia}
+              isCarousel={false}
             />
           </div>
         </div>
