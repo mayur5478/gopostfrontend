@@ -19,6 +19,7 @@ type Props = {
 };
 
 export default function All(props: Props) {
+  
   const renderContent = () => {
     switch (props.AgentData.type) {
       case "create_carousel_or_slider":
