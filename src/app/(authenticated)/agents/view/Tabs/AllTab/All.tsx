@@ -17,7 +17,7 @@ type Props = {
   refreshKey: number;
   onRefresh: () => void;
 };
-
+//function
 export default function All(props: Props) {
   
   const renderContent = () => {
@@ -43,7 +43,7 @@ export default function All(props: Props) {
             setSelectedCrossPosts={props.setSelectedPosts}
           />
         );
-
+//commit
       default:
         return (
           <AllPostFromComp
@@ -56,6 +56,7 @@ export default function All(props: Props) {
         );
     }
   };
+
 
   return <>{renderContent()}</>;
 }

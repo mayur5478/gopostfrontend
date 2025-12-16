@@ -30,7 +30,7 @@ type Props = {
 
 type AspectRatio = "square" | "vertical" | "horizontal";
 
-// --- Helper Functions ---
+
 
 async function fetchPresignedUrl(
   fileKey: string,
