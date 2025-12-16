@@ -250,6 +250,7 @@ export default function CrossPostAll(props: Props) {
                 <Post
                   postDetails={card}
                   posts={posts}
+                  onRefresh={fetchPostsOfAnAgent}
                   onEdit={() => handleEditClick(card)}
                 />
               </Label>

@@ -29,6 +29,9 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { clsx } from 'clsx';
+// 1. IMPORT API HELPERS
+import api from "@/lib/axios";
+import { CALENDAR_URLS } from "@/lib/urls";
 
 const CalendarUI = () => {
   const router = useRouter();
@@ -50,19 +53,18 @@ const CalendarUI = () => {
       const startStr = format(startDate, 'yyyy-MM-dd');
       const endStr = format(endDate, 'yyyy-MM-dd');
 
-      // Ensure this URL points to your actual backend port (usually 8000 for Django)
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/agents/calendar/events/?start=${startStr}&end=${endStr}`, {
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('access_token')}`, 
-            'Content-Type': 'application/json'
+      // 2. FIXED: Use api.get instead of fetch to avoid localhost issues
+      const response = await api.get(CALENDAR_URLS.GET_EVENTS, {
+        params: {
+            start: startStr,
+            end: endStr
         }
       });
 
-      if (!response.ok) throw new Error('Failed to fetch events');
-      const data = await response.json();
+      const data = response.data;
       
       const formattedEvents = data.map((item: any) => ({
-        id: item.id, // This is the post_id
+        id: item.id,
         title: item.title,
         date: item.date,
         platform: item.platform?.toLowerCase() || 'unknown',
@@ -93,11 +95,8 @@ const CalendarUI = () => {
     });
   };
 
-  // --- UPDATED NAVIGATION LOGIC ---
   const handleGoToPost = (agentId: string, postId: string) => {
     if (agentId) {
-        // 1. Point to the correct file path found in your project
-        // 2. Add focusPost param so ViewAgentClient switches to the Scheduled tab
         router.push(`/agents/view/${agentId}/agent?focusPost=${postId}`); 
     }
   };
@@ -120,7 +119,10 @@ const CalendarUI = () => {
           <h1 className="text-2xl font-bold">Agent</h1>
           <p className="text-gray-500 text-sm">Create, schedule, and manage your content in one place.</p>
         </div>
-        <button className="flex items-center gap-2 bg-[#FDE047] hover:bg-yellow-400 text-black font-medium px-4 py-2 rounded-full transition-colors">
+        <button 
+          className="flex items-center gap-2 bg-[#FDE047] hover:bg-yellow-400 text-black font-medium px-4 py-2 rounded-full transition-colors"
+          onClick={() => router.push('/agents/create')}
+        >
           <Plus size={18} />
           Create Agent
         </button>
@@ -155,7 +157,6 @@ const CalendarUI = () => {
       </div>
 
       <div className="flex gap-6">
-        
         {/* Calendar Grid */}
         <div className="flex-1 bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
           <div className="grid grid-cols-7 mb-4">
@@ -246,7 +247,7 @@ const CalendarUI = () => {
 
                            {evt.agent_id && (
                              <button 
-                               onClick={() => handleGoToPost(evt.agent_id, evt.id)} // Pass agentID and postID
+                               onClick={() => handleGoToPost(evt.agent_id, evt.id)} 
                                className="flex items-center gap-1 text-[10px] font-medium text-blue-600 hover:text-blue-800 hover:underline transition-colors"
                              >
                                View Post <ArrowRight size={10} />
