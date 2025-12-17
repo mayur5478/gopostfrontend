@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import ViewAgentClient from "./ViewAgentClient";
 
 // Enable dynamic parameters for client-side navigation
@@ -10,5 +11,9 @@ export async function generateStaticParams() {
 }
 
 export default function ViewAgentPage() {
-  return <ViewAgentClient />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ViewAgentClient />
+    </Suspense>
+  );
 }
