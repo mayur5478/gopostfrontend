@@ -25,7 +25,7 @@ import Scheduled from "../../Tabs/Scheduled";
 import { CalendarSync, Laptop } from "lucide-react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import api from "@/lib/axios";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AGENT_URLS, CHANNEL_URL, MEDIA_ENGINE_URLS } from "@/lib/urls";
 import { AgentData, Settings } from "../../../list/types";
 import mapAgentList from "../../../list/mapAgentList";
@@ -44,8 +44,9 @@ export default function ViewAgentClient() {
   const [selectedCPosts, setSelectedCPosts] = useState<CarouselPostDetails[]>(
     []
   );
-  const [agentName, setAgentName] = useState(agent?.name);
-  const params = useParams();
+  const [agentName, setAgentName] = useState<string>("");
+  const params = useParams<{ id?: string }>();
+  const agentId = params?.id;
   const router = useRouter();
   const searchParams = useSearchParams(); // Added useSearchParams
   
@@ -108,12 +109,13 @@ export default function ViewAgentClient() {
   useEffect(() => {
 
     async function fetchAgents() {
+      if (!agentId) return;
       try {
         let channel = await api.get(CHANNEL_URL.GET_CHANNEL);
         console.log("get all channels", channel.data.results);
 
         const { data } = await api.get(
-          AGENT_URLS.VIEW_AGENT(params.id as string)
+          AGENT_URLS.VIEW_AGENT(agentId)
         );
         console.log("data here for posts", data);
         let agent: AgentData = mapAgentList(data, channel.data.results);
